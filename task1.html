@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quadratic Equations — Task 1</title>
+</head>
+<body style="margin:0;font-family:Inter,Segoe UI,Roboto,Arial,sans-serif;background:#f7fafc;color:#0f1724;min-height:100vh;">
+  <div style="max-width:920px;margin:28px auto;padding:20px;">
+    <header style="display:flex;gap:16px;align-items:center;">
+      <div style="width:64px;height:64px;border-radius:12px;background:linear-gradient(135deg,#7dd3fc,#60a5fa);display:flex;align-items:center;justify-content:center;color:#012033;font-weight:800;font-size:22px;box-shadow:0 10px 30px rgba(2,32,58,0.08);">Q¹</div>
+      <div>
+        <h1 style="margin:0;font-size:26px;color:#0f1724;">Task 1 — Identify Coefficients</h1>
+        <p style="color:#4b5563;margin-top:6px;">Practice recognizing the coefficients a, b, and c in a quadratic equation.</p>
+      </div>
+    </header>
+
+    <div style="background:linear-gradient(180deg,#ffffff,#fbfdff);border-radius:14px;padding:20px;margin-top:22px;box-shadow:0 8px 20px rgba(15,23,42,0.04);">
+      <h2 style="color:#0f1724;margin-top:0;">Interactive Exercise</h2>
+      <p style="color:#475569;">You will see a random quadratic equation. Enter the correct values for <strong>a</strong>, <strong>b</strong>, and <strong>c</strong>.</p>
+
+      <div style="text-align:center;margin:20px 0;">
+        <div id="equation" style="font-size:22px;font-weight:600;color:#1e293b;background:#eef6ff;padding:12px 20px;border-radius:10px;display:inline-block;">ax² + bx + c = 0</div>
+      </div>
+
+      <form id="coeffForm" style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:16px;">
+        <label style="display:flex;flex-direction:column;font-size:14px;color:#334155;">
+          a:
+          <input type="number" id="aInput" style="padding:8px 10px;border:1px solid #cbd5e1;border-radius:8px;min-width:70px;">
+        </label>
+        <label style="display:flex;flex-direction:column;font-size:14px;color:#334155;">
+          b:
+          <input type="number" id="bInput" style="padding:8px 10px;border:1px solid #cbd5e1;border-radius:8px;min-width:70px;">
+        </label>
+        <label style="display:flex;flex-direction:column;font-size:14px;color:#334155;">
+          c:
+          <input type="number" id="cInput" style="padding:8px 10px;border:1px solid #cbd5e1;border-radius:8px;min-width:70px;">
+        </label>
+      </form>
+
+      <div style="text-align:center;margin-top:18px;">
+        <button onclick="checkAnswer()" style="background:linear-gradient(135deg,#60a5fa,#3b82f6);color:#fff;padding:10px 22px;border:none;border-radius:10px;cursor:pointer;font-size:16px;box-shadow:0 6px 14px rgba(59,130,246,0.25);transition:background 0.3s ease;">Check</button>
+        <button onclick="newEquation()" style="margin-left:12px;background:linear-gradient(135deg,#34d399,#10b981);color:#fff;padding:10px 22px;border:none;border-radius:10px;cursor:pointer;font-size:16px;box-shadow:0 6px 14px rgba(16,185,129,0.25);transition:background 0.3s ease;">New Equation</button>
+      </div>
+
+      <div id="feedback" style="margin-top:18px;font-size:15px;font-weight:500;text-align:center;"></div>
+    </div>
+
+    <footer style="margin-top:22px;color:#64748b;font-size:13px;text-align:center;">This file is "task1.html" — embed it as the first exercise for quadratic equations.</footer>
+  </div>
+
+  <script>
+    const equations = [
+      {a:2,b:-5,c:3},
+      {a:1,b:4,c:3},
+      {a:3,b:1,c:-2},
+      {a:1,b:0,c:-9},
+      {a:5,b:0,c:0}
+    ];
+
+    let current = {};
+
+    function formatEquation(eq) {
+      let bSign = eq.b >= 0 ? "+" : "";
+      let cSign = eq.c >= 0 ? "+" : "";
+      return `${eq.a}x² ${bSign}${eq.b}x ${cSign}${eq.c} = 0`;
+    }
+
+    function newEquation() {
+      current = equations[Math.floor(Math.random() * equations.length)];
+      document.getElementById("equation").innerText = formatEquation(current);
+      document.getElementById("aInput").value = "";
+      document.getElementById("bInput").value = "";
+      document.getElementById("cInput").value = "";
+      document.getElementById("feedback").innerText = "";
+    }
+
+    function checkAnswer() {
+      const aVal = parseInt(document.getElementById("aInput").value);
+      const bVal = parseInt(document.getElementById("bInput").value);
+      const cVal = parseInt(document.getElementById("cInput").value);
+      if (aVal === current.a && bVal === current.b && cVal === current.c) {
+        document.getElementById("feedback").innerText = "✅ Correct! Well done.";
+        document.getElementById("feedback").style.color = "#059669";
+      } else {
+        document.getElementById("feedback").innerText = "❌ Incorrect. Try again.";
+        document.getElementById("feedback").style.color = "#dc2626";
+      }
+    }
+
+    newEquation();
+  </script>
+</body>
+</html>
