@@ -1,0 +1,52 @@
+<section id="task2">
+  <h2>Task 2: Reduced or Not?</h2>
+  <p>Decide whether the quadratic equation is <strong>reduced</strong> (leading coefficient = 1) or <strong>not reduced</strong>.</p>
+
+  <div id="equation2" class="equation-box"></div>
+
+  <div class="input-box">
+    <label>
+      <input type="radio" name="reduced" value="reduced"> Reduced
+    </label>
+    <label>
+      <input type="radio" name="reduced" value="not"> Not reduced
+    </label>
+  </div>
+
+  <button onclick="checkTask2()">Check</button>
+  <p id="feedback2"></p>
+</section>
+
+<script>
+  // Task 2 equation generator
+  function generateEquation2() {
+    let a = Math.floor(Math.random() * 5) + 1; // 1–5
+    let b = Math.floor(Math.random() * 11) - 5; // -5..5
+    let c = Math.floor(Math.random() * 11) - 5;
+
+    document.getElementById("equation2").textContent = 
+      `${a}x² ${b>=0?"+":""}${b}x ${c>=0?"+":""}${c} = 0`;
+
+    return a;
+  }
+
+  let aTask2 = generateEquation2();
+
+  function checkTask2() {
+    let choice = document.querySelector('input[name="reduced"]:checked');
+    if (!choice) {
+      document.getElementById("feedback2").textContent = "Please select an option!";
+      document.getElementById("feedback2").style.color = "red";
+      return;
+    }
+
+    let correct = (aTask2 === 1 ? "reduced" : "not");
+    if (choice.value === correct) {
+      document.getElementById("feedback2").textContent = "✅ Correct!";
+      document.getElementById("feedback2").style.color = "green";
+    } else {
+      document.getElementById("feedback2").textContent = "❌ Incorrect. Try again!";
+      document.getElementById("feedback2").style.color = "red";
+    }
+  }
+</script>
